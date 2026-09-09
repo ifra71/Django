@@ -1,17 +1,13 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+# Create your views here.
 
-from django.template import loader
+def home(request):
+    context = {
+        "name" : "ifra",
+        "age" : 22
+    }
+    return render(request, "members/home.html", context)
 
-def members(request):
-    template = loader.get_template('my_first.html')
-    return HttpResponse(template.render())
-
-def members(request):
-    if request.method == "GET":
-        return HttpResponse("Here are the members")
-
-def members(request):
-    if request.method == "POST":
-        name = request.POST["name"]
-        return HttpResponse("Received " + name)
+def about(request):
+    return render(request, "members/about.html")
