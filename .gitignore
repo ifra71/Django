@@ -8,9 +8,9 @@ __pycache__/
 *.py[cod]
 
 # Django database
-db.sqlite3
+first_project/db.sqlite3
 
-# Environment variables / secrets
+# Environment variables
 .env
 .env.*
 
