@@ -11,6 +11,9 @@ class User(models.Model):
         on_delete = models.CASCADE
     )
 
+    def __str__(self):
+        return self.name
+
 
 class Profile(models.Model):
     profile_picture = models.ImageField(upload_to="profile_pictures/")
@@ -25,6 +28,10 @@ class Profile(models.Model):
         )
     contact_number = models.CharField(max_length=20)
 
+    def __str__(self):
+        return self.role
+
+
 
 class Project(models.Model):
     title = models.CharField(max_length=200)
@@ -32,6 +39,9 @@ class Project(models.Model):
     start_date = models.DateField()
     end_date = models.DateField()
     team_members = models.ManyToManyField(User)
+
+    def __str__(self):
+        return self.title
 
 
 class Task(models.Model):
@@ -58,6 +68,12 @@ class Task(models.Model):
         User,
         on_delete = models.CASCADE
         )
+
+    def __str__(self):
+        return self.title
+
+    
+
 
 
 class Document(models.Model):
