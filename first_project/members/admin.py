@@ -1,6 +1,6 @@
 
 from django.contrib import admin
-from .models import Members, Course, Student
+from .models import Members, PremiumMembers, Course, Student
 
 # admin.site.register(Members)
 # admin.site.register(Course)
@@ -26,3 +26,8 @@ class MembersAdmin(admin.ModelAdmin):
     search_fields = ["name", "email"]
 
     actions =[make_18, delete_members, count_members]
+
+
+@admin.register(PremiumMembers)
+class PremiumMembersAdmin(admin.ModelAdmin):
+     list_display = ["name", "email", "age", "nickname"]

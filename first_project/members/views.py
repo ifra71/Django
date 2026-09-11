@@ -1,13 +1,19 @@
 from django.shortcuts import render
-from django.http import HttpResponse
-# Create your views here.
+from django.views import View
 
-def home(request):
-    context = {
-        "name" : "ifra",
-        "age" : 22
-    }
-    return render(request, "members/home.html", context)
+class HomeView(View):
 
-def about(request):
-    return render(request, "members/about.html")
+    def get(self, request):
+        context = {
+            "name": "ifra",
+            "age": 22
+        }
+
+        return render(request, "members/home.html",context)
+
+
+class AboutView(View):
+
+    def get(self, request):
+
+        return render(request, "members/about.html")

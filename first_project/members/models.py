@@ -1,9 +1,38 @@
 from django.db import models
 from django.core.validators import MinValueValidator
 from django.core.exceptions import ValidationError
+from django.contrib.contenttypes.fields import GenericForeignKey
+from django.contrib.contenttypes.models import ContentType
+
+
+class Article(models.Model):
+
+    title = models.CharField(max_length=100)
+    content = models.TextField()
+
+
+class Video(models.Model):
+
+    title = models.CharField(max_length=100)
+    url = models.URLField()
+
+
+class Comment(models.Model):
+
+    content_type = models.ForeignKey(
+        ContentType,
+        on_delete=models.CASCADE
+    )
+    object_id = models.PositiveIntegerField()
+    content_object = GenericForeignKey(
+        "content_type",
+        "object_id"
+    )
+
 
 
 def validate_phone(value):
+
     if not value.startswith("03"):
         raise ValidationError("Phone number must start with 03.")
 
@@ -31,6 +60,14 @@ class Members(models.Model):
     class Meta:
         ordering = ["name"]
        
+
+
+class PremiumMembers(Members):
+    class Meta:
+        proxy = True
+        ordering = ["-age"]
+
+
 
 
 class Course(models.Model):
