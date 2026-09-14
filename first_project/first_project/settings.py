@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'members',
     'tickets',
+    'ip_logging',
     'django_extensions',
 ]
 
@@ -47,6 +48,7 @@ MIDDLEWARE = [
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'members.middleware.MyMiddleware',
+    'ip_logging.middleware.IPLogging',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
@@ -138,3 +140,24 @@ CELERY_BEAT_SCHEDULE = {
         "schedule": 10.0,
     },
 }
+
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+
+    "handlers": {
+        "file": {
+            "class": "logging.FileHandler",
+            "filename": "ip_requests.log",
+        },
+    },
+
+    "loggers": {
+        "ip_logging": {
+            "handlers": ["file"],
+            "level": "INFO",
+        },
+    },
+}
+
+AUTH_USER_MODEL = "ip_logging.User"
