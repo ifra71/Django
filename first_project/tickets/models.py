@@ -89,6 +89,9 @@ class Document(models.Model):
         on_delete=models.CASCADE
     )
 
+    def __str__(self):
+        return self.name
+
 
 
 class Comment(models.Model):
@@ -110,6 +113,7 @@ class Comment(models.Model):
         Project,
         on_delete=models.CASCADE
     )
+
 
 
 

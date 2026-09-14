@@ -129,3 +129,5 @@ MAILERS = {
         'BACKEND': 'django.core.mail.backends.console.EmailBackend',
     },
 }
+
+CELERY_BROKER_URL = "redis://localhost:6379/0"
