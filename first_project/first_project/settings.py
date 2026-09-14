@@ -131,3 +131,10 @@ MAILERS = {
 }
 
 CELERY_BROKER_URL = "redis://localhost:6379/0"
+
+CELERY_BEAT_SCHEDULE = {
+    "run-scheduled-task-every-10-seconds": {
+        "task": "tickets.tasks.scheduled_task",
+        "schedule": 10.0,
+    },
+}
