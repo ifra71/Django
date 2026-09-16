@@ -2,6 +2,7 @@
 
 from django.db import migrations
 
+
 def fill_nicknames(apps, schema_editor):
     Members = apps.get_model("members", "Members")
 
@@ -13,10 +14,9 @@ def fill_nicknames(apps, schema_editor):
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('members', '0005_populate_nicknames'),
+        ("members", "0005_populate_nicknames"),
     ]
 
     operations = [
         migrations.RunPython(fill_nicknames),
-
     ]

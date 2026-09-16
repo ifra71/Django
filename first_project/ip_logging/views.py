@@ -1,3 +1,4 @@
+from django.contrib.auth.views import LoginView, LogoutView
 from django.http import HttpResponse
 from django.views import View
 
@@ -16,3 +17,10 @@ class DashboardView(View):
     def get(self, request):
         return HttpResponse("Dashboard endpoint")
 
+
+class UserLoginView(LoginView):
+    template_name = "login.html"
+
+
+class UserLogoutView(LogoutView):
+    pass

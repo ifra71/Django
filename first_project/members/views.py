@@ -1,15 +1,13 @@
 from django.shortcuts import render
 from django.views import View
 
+
 class HomeView(View):
 
     def get(self, request):
-        context = {
-            "name": "ifra",
-            "age": 22
-        }
+        context = {"name": "ifra", "age": 22}
 
-        return render(request, "members/home.html",context)
+        return render(request, "members/home.html", context)
 
 
 class AboutView(View):

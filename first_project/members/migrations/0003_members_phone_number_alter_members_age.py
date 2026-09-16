@@ -8,19 +8,25 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('members', '0002_members_delete_memebers'),
+        ("members", "0002_members_delete_memebers"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='members',
-            name='phone_number',
-            field=models.CharField(default='03000000000', max_length=11, validators=[members.models.validate_phone]),
+            model_name="members",
+            name="phone_number",
+            field=models.CharField(
+                default="03000000000",
+                max_length=11,
+                validators=[members.models.validate_phone],
+            ),
             preserve_default=False,
         ),
         migrations.AlterField(
-            model_name='members',
-            name='age',
-            field=models.IntegerField(validators=[django.core.validators.MinValueValidator(18)]),
+            model_name="members",
+            name="age",
+            field=models.IntegerField(
+                validators=[django.core.validators.MinValueValidator(18)]
+            ),
         ),
     ]

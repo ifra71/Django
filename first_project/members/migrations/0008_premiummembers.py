@@ -6,20 +6,19 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('members', '0007_article_video_comment'),
+        ("members", "0007_article_video_comment"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='PremiumMembers',
-            fields=[
-            ],
+            name="PremiumMembers",
+            fields=[],
             options={
-                'ordering': ['-age'],
-                'proxy': True,
-                'indexes': [],
-                'constraints': [],
+                "ordering": ["-age"],
+                "proxy": True,
+                "indexes": [],
+                "constraints": [],
             },
-            bases=('members.members',),
+            bases=("members.members",),
         ),
     ]

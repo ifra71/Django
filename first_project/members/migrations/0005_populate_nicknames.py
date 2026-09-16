@@ -2,6 +2,7 @@
 
 from django.db import migrations
 
+
 def populate_nicknames(apps, schema_editor):
     Members = apps.get_model("members", "Members")
 
@@ -9,10 +10,11 @@ def populate_nicknames(apps, schema_editor):
         member.nickname = member.name
         member.save()
 
+
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('members', '0004_course_passport_alter_members_options_and_more'),
+        ("members", "0004_course_passport_alter_members_options_and_more"),
     ]
 
     operations = [

@@ -1,5 +1,5 @@
-from django.db import models
 from django.contrib.auth.models import AbstractUser, UserManager
+from django.db import models
 
 
 class CustomUserManager(UserManager):
@@ -10,10 +10,7 @@ class CustomUserManager(UserManager):
 
         email = self.normalize_email(email)
 
-        user = self.model(
-            email=email,
-            **extra_fields
-        )
+        user = self.model(email=email, **extra_fields)
 
         user.set_password(password)
         user.save(using=self._db)
@@ -26,11 +23,7 @@ class CustomUserManager(UserManager):
         extra_fields.setdefault("is_superuser", True)
         extra_fields.setdefault("is_active", True)
 
-        return self.create_user(
-            email=email,
-            password=password,
-            **extra_fields
-        )
+        return self.create_user(email=email, password=password, **extra_fields)
 
 
 class User(AbstractUser):
@@ -48,7 +41,7 @@ class User(AbstractUser):
     role = models.CharField(
         max_length=10,
         choices=RANKS,
-        default="bronze",
+        default="silver",
     )
 
     USERNAME_FIELD = "email"

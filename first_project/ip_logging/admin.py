@@ -13,25 +13,31 @@ class CustomUserAdmin(UserAdmin):
 
     fieldsets = (
         (None, {"fields": ("email", "password")}),
-        ("Permissions", {
-            "fields": (
-                "is_active",
-                "is_staff",
-                "is_superuser",
-            )
-        }),
+        (
+            "Permissions",
+            {
+                "fields": (
+                    "is_active",
+                    "is_staff",
+                    "is_superuser",
+                )
+            },
+        ),
         ("Role", {"fields": ("role",)}),
     )
 
     add_fieldsets = (
-        (None, {
-            "fields": (
-                "email",
-                "password1",
-                "password2",
-                "role",
-                "is_staff",
-                "is_active",
-            ),
-        }),
+        (
+            None,
+            {
+                "fields": (
+                    "email",
+                    "password1",
+                    "password2",
+                    "role",
+                    "is_staff",
+                    "is_active",
+                ),
+            },
+        ),
     )

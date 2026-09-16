@@ -9,75 +9,189 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='Profile',
+            name="Profile",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('profile_picture', models.ImageField(upload_to='profile_pictures/')),
-                ('role', models.CharField(choices=[('Manager', 'Manager'), ('QA', 'QA'), ('Developer', 'Developer')], max_length=150)),
-                ('contact_number', models.CharField(max_length=20)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("profile_picture", models.ImageField(upload_to="profile_pictures/")),
+                (
+                    "role",
+                    models.CharField(
+                        choices=[
+                            ("Manager", "Manager"),
+                            ("QA", "QA"),
+                            ("Developer", "Developer"),
+                        ],
+                        max_length=150,
+                    ),
+                ),
+                ("contact_number", models.CharField(max_length=20)),
             ],
         ),
         migrations.CreateModel(
-            name='Project',
+            name="Project",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('title', models.CharField(max_length=200)),
-                ('description', models.TextField()),
-                ('start_date', models.DateField()),
-                ('end_date', models.DateField()),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("title", models.CharField(max_length=200)),
+                ("description", models.TextField()),
+                ("start_date", models.DateField()),
+                ("end_date", models.DateField()),
             ],
         ),
         migrations.CreateModel(
-            name='Document',
+            name="Document",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=200)),
-                ('description', models.TextField()),
-                ('file', models.FileField(upload_to='documents/', validators=[tickets.validators.validate_file_size])),
-                ('version', models.IntegerField()),
-                ('project', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='tickets.project')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(max_length=200)),
+                ("description", models.TextField()),
+                (
+                    "file",
+                    models.FileField(
+                        upload_to="documents/",
+                        validators=[tickets.validators.validate_file_size],
+                    ),
+                ),
+                ("version", models.IntegerField()),
+                (
+                    "project",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="tickets.project",
+                    ),
+                ),
             ],
         ),
         migrations.CreateModel(
-            name='User',
+            name="User",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('email', models.EmailField(max_length=254, unique=True)),
-                ('name', models.CharField(max_length=200)),
-                ('age', models.IntegerField()),
-                ('profile', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, to='tickets.profile')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("email", models.EmailField(max_length=254, unique=True)),
+                ("name", models.CharField(max_length=200)),
+                ("age", models.IntegerField()),
+                (
+                    "profile",
+                    models.OneToOneField(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="tickets.profile",
+                    ),
+                ),
             ],
         ),
         migrations.CreateModel(
-            name='Task',
+            name="Task",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('title', models.CharField(max_length=200)),
-                ('description', models.TextField()),
-                ('status', models.CharField(choices=[('Open', 'Open'), ('Review', 'Review'), ('Working', 'Working'), ('Awaiting releease', 'Awaiting Release'), ('waiting QA', 'Waiting Qa')], max_length=200)),
-                ('project', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='tickets.project')),
-                ('assignee', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='tickets.user')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("title", models.CharField(max_length=200)),
+                ("description", models.TextField()),
+                (
+                    "status",
+                    models.CharField(
+                        choices=[
+                            ("Open", "Open"),
+                            ("Review", "Review"),
+                            ("Working", "Working"),
+                            ("Awaiting releease", "Awaiting Release"),
+                            ("waiting QA", "Waiting Qa"),
+                        ],
+                        max_length=200,
+                    ),
+                ),
+                (
+                    "project",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="tickets.project",
+                    ),
+                ),
+                (
+                    "assignee",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE, to="tickets.user"
+                    ),
+                ),
             ],
         ),
         migrations.AddField(
-            model_name='project',
-            name='team_members',
-            field=models.ManyToManyField(to='tickets.user'),
+            model_name="project",
+            name="team_members",
+            field=models.ManyToManyField(to="tickets.user"),
         ),
         migrations.CreateModel(
-            name='Comment',
+            name="Comment",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('text', models.TextField()),
-                ('created_at', models.DateField()),
-                ('project', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='tickets.project')),
-                ('task', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='tickets.task')),
-                ('author', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='tickets.user')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("text", models.TextField()),
+                ("created_at", models.DateField()),
+                (
+                    "project",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="tickets.project",
+                    ),
+                ),
+                (
+                    "task",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE, to="tickets.task"
+                    ),
+                ),
+                (
+                    "author",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE, to="tickets.user"
+                    ),
+                ),
             ],
         ),
     ]

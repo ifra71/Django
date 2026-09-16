@@ -1,8 +1,8 @@
-from django.db import models
-from django.core.validators import MinValueValidator
-from django.core.exceptions import ValidationError
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
+from django.core.exceptions import ValidationError
+from django.core.validators import MinValueValidator
+from django.db import models
 
 
 class Article(models.Model):
@@ -19,16 +19,9 @@ class Video(models.Model):
 
 class Comment(models.Model):
 
-    content_type = models.ForeignKey(
-        ContentType,
-        on_delete=models.CASCADE
-    )
+    content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
     object_id = models.PositiveIntegerField()
-    content_object = GenericForeignKey(
-        "content_type",
-        "object_id"
-    )
-
+    content_object = GenericForeignKey("content_type", "object_id")
 
 
 def validate_phone(value):
@@ -40,26 +33,16 @@ def validate_phone(value):
 class Members(models.Model):
     name = models.CharField(max_length=100)
     email = models.EmailField(unique=True)
-    age = models.IntegerField(
-        validators = [MinValueValidator(18)]
-    )
-    phone_number = models.CharField(
-        max_length = 11,
-        validators = [validate_phone]
-    )
+    age = models.IntegerField(validators=[MinValueValidator(18)])
+    phone_number = models.CharField(max_length=11, validators=[validate_phone])
 
-    nickname = models.CharField(
-        max_length=50,
-        null=True,
-        blank=True
-    )
+    nickname = models.CharField(max_length=50, null=True, blank=True)
 
     def __str__(self):
         return self.name
-    
+
     class Meta:
         ordering = ["name"]
-       
 
 
 class PremiumMembers(Members):
@@ -68,10 +51,9 @@ class PremiumMembers(Members):
         ordering = ["-age"]
 
 
-
-
 class Course(models.Model):
     name = models.CharField(max_length=100)
+
 
 class PhoneNumberField(models.CharField):
 
@@ -79,22 +61,17 @@ class PhoneNumberField(models.CharField):
         kwargs["max_length"] = 11
         super().__init__(*args, **kwargs)
 
+
 class Student(models.Model):
     name = models.CharField(max_length=100)
-    course = models.ForeignKey(
-        Course,
-        on_delete=models.CASCADE
-    )
+    course = models.ForeignKey(Course, on_delete=models.CASCADE)
     phone = PhoneNumberField()
-
 
 
 class Passport(models.Model):
     number = models.CharField(max_length=20)
 
+
 class Person(models.Model):
     name = models.CharField(max_length=100)
-    passport = models.OneToOneField(
-        Passport,
-        on_delete=models.CASCADE
-    )
+    passport = models.OneToOneField(Passport, on_delete=models.CASCADE)
