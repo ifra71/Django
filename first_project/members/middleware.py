@@ -1,6 +1,3 @@
-from django.http import HttpResponse
-
-
 class MyMiddleware:
 
     def __init__(self, get_response):

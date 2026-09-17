@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Course, Members, PremiumMembers, Student
+from .models import Members, PremiumMembers
 
 # admin.site.register(Members)
 # admin.site.register(Course)

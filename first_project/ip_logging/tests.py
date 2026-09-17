@@ -1,6 +1,9 @@
+from django.conf import settings
 from django.test import TestCase
 
 from .models import User
+
+settings.TESTING = True
 
 
 class HomeTest(TestCase):

@@ -9,3 +9,11 @@ repos:
     hooks:
       - id: isort
         args: ["--profile", "black"]
+
+  -  repo: https://github.com/pycqa/flake8
+     rev: 7.3.0
+     hooks:
+      - id: flake8
+        args:
+          - --ignore=E501
+          - --exclude=*/migrations/*
